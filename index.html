@@ -110,7 +110,11 @@ function ctrlP(){
  if(man&&!man.fall)return man;
  let b=null,bd=1e9;for(const p of P)if(p.team==0&&!p.gk&&!p.fall){const d=dist(p,ball);if(d<bd){bd=d;b=p}}
  return b||P.find(p=>p.team==0&&!p.gk)}
-function switchP(){const l=P.filter(p=>p.team==0&&!p.gk&&!p.fall).sort((a,b)=>dist(a,ball)-dist(b,ball));if(l.length>1){man=l[(l.indexOf(ctrl)+1)%l.length];ball.tg=null;ctrl=man}}
+let swL=[],swT=-9,swK=0;
+function switchP(){
+ if(T-swT>1.5||!swL.length){swL=P.filter(p=>p.team==0&&!p.gk&&p!==ctrl).sort((a,b)=>dist(a,ball)-dist(b,ball)).concat(ctrl&&!ctrl.gk?[ctrl]:[]);swK=0}else swK++;
+ const l=swL.filter(p=>!p.fall);if(!l.length)return;
+ man=l[swK%l.length];swT=T;ball.tg=null;ctrl=man}
 function mvTo(p,tx,ty,sp,dt){const dx=tx-p.x,dy=ty-p.y,d=Math.hypot(dx,dy);if(d<4)return;p.x+=dx/d*sp*dt;p.y+=dy/d*sp*dt;p.dir=Math.atan2(dy,dx);p.mv=true;clamp(p)}
 function kick(p,pw=.46){
  const gx=p.team?0:FW;let ty=null;
@@ -150,14 +154,14 @@ function ai(p,dt){
   else if(Math.abs(gx-p.x)<290&&p.sc>.5&&Math.random()<dt*2.5){p.ch=0;p.cm=.3+Math.random()*.6}
   else if(p.sc>1.2&&Math.random()<dt*.9){const q=aiTarget(p);if(q)pass(p,q)}
   return}
- const hx=Math.max(60,Math.min(FW-60,p.hx+(ball.x-750)*.45)),hy=Math.max(40,Math.min(FH-40,p.hy+(ball.y-400)*.35)),S=130;
+ const hx=Math.max(60,Math.min(FW-60,p.hx+(ball.x-750)*.45)),hy=Math.max(40,Math.min(FH-40,p.hy+(ball.y-400)*.35)),S=145;
  if(ball.o&&ball.o.team!=t){
   if(nearest(mates,ball.o)===p||(!ball.o.mv&&mates.filter(q=>!q.fall).sort((a,b)=>dist(a,ball.o)-dist(b,ball.o)).indexOf(p)==1)){
-   mvTo(p,ball.o.x,ball.o.y,ball.o.mv?S:165,dt);
+   mvTo(p,ball.o.x+(ball.o.mv?Math.cos(ball.o.dir)*45:0),ball.o.y+(ball.o.mv?Math.sin(ball.o.dir)*45:0),ball.o.mv?S:165,dt);
    if(dist(p,ball.o)<50&&p.cd<=0&&Math.random()<dt*(ball.o.mv?1.8:3.5))slide(p,Math.atan2(ball.o.y-p.y,ball.o.x-p.x))
   }else mvTo(p,hx,hy,S,dt)
  }else if(ball.o){const c=ball.o,d=t?-1:1,oth=mates.filter(q=>q!==c).sort((a,b)=>a.i-b.i),k=Math.max(0,oth.indexOf(p));mvTo(p,Math.max(150,Math.min(FW-150,c.x+d*(170+k*70))),Math.max(70,Math.min(FH-70,c.y+(k==0?-180:k==1?180:0))),S,dt)}
- else if(nearest(mates,ball)===p)mvTo(p,ball.x+ball.vx*.2,ball.y+ball.vy*.2,S,dt);
+ else if(nearest(mates,ball)===p||(ball.idle>1.2&&mates.filter(q=>!q.fall).sort((a,b)=>dist(a,ball)-dist(b,ball)).indexOf(p)==1))mvTo(p,ball.x+ball.vx*.2,ball.y+ball.vy*.2,S,dt);
  else mvTo(p,hx,hy,S,dt)}
 function human(p,dt){
  let ix=(keys.arrowright||keys.d?1:0)-(keys.arrowleft||keys.a?1:0),iy=(keys.arrowdown||keys.s?1:0)-(keys.arrowup||keys.w?1:0);
@@ -189,7 +193,7 @@ function update(dt){
    continue}
   p===ctrl?human(p,dt):ai(p,dt)}
  if(!ball.o&&ball.free<=0)for(const p of P)if(!p.fall&&dist(p,ball)<(p.gk?30:26)){ball.o=p;p.sc=0;ball.tg=null;if(p.gk)SFX.save();break}
- ball.stl=(ball.stl||0)-dt;if(ball.o&&ball.stl<=0&&!ball.o.gk)for(const p of P)if(p.team!=ball.o.team&&!p.fall&&(dist(p,ball)<22||dist(p,ball.o)<24)&&(p.team==0||Math.random()<dt*(ball.o.mv?6:12))){if(p.team==0){ball.o.fall=1.3;ball.o.slide=0}SFX.steal();ball.o=p;p.sc=0;ball.stl=.6;ball.tg=null;break}
+ ball.stl=(ball.stl||0)-dt;ball.idle=(!ball.o&&Math.hypot(ball.vx,ball.vy)<40)?(ball.idle||0)+dt:0;if(ball.o&&ball.stl<=0&&!ball.o.gk)for(const p of P)if(p.team!=ball.o.team&&!p.fall&&(dist(p,ball)<22||dist(p,ball.o)<24)&&(p.team==0||Math.random()<dt*(ball.o.mv?6:12))){if(p.team==0){ball.o.fall=1.3;ball.o.slide=0}SFX.steal();ball.o=p;p.sc=0;ball.stl=.6;ball.tg=null;break}
  if(ball.o){const o=ball.o;ball.x=o.x+Math.cos(o.dir)*20;ball.y=o.y+Math.sin(o.dir)*20;ball.vx=ball.vy=0}
  else{
   ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;const f=Math.exp(-.9*dt);ball.vx*=f;ball.vy*=f;
