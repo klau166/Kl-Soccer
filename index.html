@@ -39,7 +39,7 @@ canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-ac
 #info{text-align:left;font-size:13px;line-height:1.45;max-width:540px;max-height:58vh;overflow:auto;background:rgba(0,0,0,.35);padding:10px 14px;border-radius:12px}#info p{margin:0 0 7px}
 #om{padding:10px 24px;border:0;border-radius:10px;font-size:16px;font-weight:700;background:rgba(255,255,255,.2);color:#fff}
 #pw{position:absolute;top:-18px;right:0;width:80px;height:10px;border-radius:6px;background:rgba(0,0,0,.45);overflow:hidden;display:none;border:1px solid #fff8}#pwf{display:block;height:100%;width:0;background:linear-gradient(90deg,#4caf50,#ffeb3b,#f44336);background-size:80px 100%}
-#pv{position:static;width:200px;height:67px;background:rgba(0,0,0,.25);border-radius:10px}
+#pv{position:static;width:160px;height:54px;background:rgba(0,0,0,.25);border-radius:10px}
 #rot{position:fixed;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#111;color:#fff;text-align:center;font-size:20px;font-weight:700}
 #rot span{font-size:70px}
 #pz{position:fixed;top:calc(env(safe-area-inset-top,0px) + 6px);right:calc(env(safe-area-inset-right,0px) + 10px);z-index:4;width:44px;height:44px;border-radius:50%;border:2px solid #fff;background:rgba(20,60,25,.75);color:#fff;display:flex;align-items:center;justify-content:center;padding:0}#pz svg{width:22px;height:22px}
@@ -57,6 +57,8 @@ canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-ac
 #oe svg{width:76px;height:76px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px}
 .pk{display:inline-block;width:11px;height:11px;border-radius:50%;margin:0 2px;border:2px solid #fff;vertical-align:-2px}.pk.g{background:#4caf50}.pk.r{background:#e53935}
 #pa{position:fixed;inset:0;z-index:7;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(0,0,0,.8);color:#fff}#pa h2{margin:0 0 4px;font-size:30px}
+#m1{gap:7px}#m1 .row .mb{padding:10px 20px}#fmlbl{font-size:12px;font-weight:700;margin-bottom:-3px}
+#fmbox{display:flex;gap:10px}.fo{background:rgba(0,0,0,.5);border:2px solid #fff6;border-radius:10px;padding:3px 6px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:1px}.fo.on{border-color:#ffd91a;background:rgba(0,0,0,.75)}.fo svg{width:60px;height:36px}.fo b{font-size:12px}
 </style></head><body>
 <canvas id="cv"></canvas>
 <div id="hud"><div id="sc"><span id="s0">0</span><i>:</i><span id="s1">0</span></div><div id="tm"></div></div>
@@ -72,8 +74,8 @@ canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-ac
 <div id="pa"><h2>Pausa</h2><button class="mb" id="pres" data-i="play">Volver al partido</button><button class="mb alt" id="pmenu" data-i="home">Volver al menú</button><button class="mb alt" id="psnd"></button></div>
 <div id="menu">
 <div class="mv" id="m0"><h1>KL SOCCER</h1><div class="sub">Fútbol 4 vs 4</div><button class="mb" id="mplay" data-i="play">JUGAR</button><button class="mb alt" id="minfo" data-i="info">INFORMACIÓN</button></div>
-<div class="mv" id="m1"><h2>Elige tu equipación</h2><canvas id="pv" width="240" height="80"></canvas><div id="cfgbox"></div><div class="row"><button class="mb alt" id="mback1" data-i="left">Volver</button><button class="mb" id="mgo">¡A LA CANCHA!</button></div></div>
-<div class="mv" id="m2"><h2>Información</h2><div id="info"><p><b>Objetivo:</b> mete más goles que el rival. Hay 2 tiempos de 2 minutos; si queda empate se define por penales (5 tiros cada uno y luego muerte súbita).</p><p><b>Joystick (izquierda):</b> mueve a tu jugador. Atacas hacia la derecha.</p><p><b><i class="dot" style="background:#ee3333"></i> Rojo:</b> con balón, mantenlo apretado para cargar la potencia y suéltalo para patear. Sin balón, hace una barrida: el rival cae y el balón queda para ti.</p><p><b><i class="dot" style="background:#389dff"></i> Celeste:</b> con balón, pasa. Sin balón, cambia al siguiente jugador.</p><p><b>Equipos:</b> 3 jugadores + arquero por lado. Los arqueros los controla la computadora y usan la camiseta y el short al revés. Si el balón sale por el fondo, saca el arquero.</p><p><b>Quitar el balón:</b> además de la barrida, si pasas por encima del balón que lleva un rival, te lo quedas y el rival cae al suelo un momento.</p><p><b>Penales:</b> al patear, toca ROJO cuando la mira esté donde quieras. Al atajar, elige Izq, Centro o Der.</p><p><b>Teclado:</b> flechas o WASD para moverte, Z rojo, X celeste.</p></div><button class="mb alt" id="mback2" data-i="left">Volver</button></div>
+<div class="mv" id="m1"><h2>Elige tu equipación</h2><canvas id="pv" width="240" height="80"></canvas><div id="cfgbox"></div><div id="fmlbl">Formación</div><div id="fmbox"></div><div class="row"><button class="mb alt" id="mback1" data-i="left">Volver</button><button class="mb" id="mgo">¡A LA CANCHA!</button></div></div>
+<div class="mv" id="m2"><h2>Información</h2><div id="info"><p><b>Objetivo:</b> mete más goles que el rival. Hay 2 tiempos de 2 minutos; si queda empate se define por penales (5 tiros cada uno y luego muerte súbita).</p><p><b>Joystick (izquierda):</b> mueve a tu jugador. Atacas hacia la derecha.</p><p><b><i class="dot" style="background:#ee3333"></i> Rojo:</b> con balón, mantenlo apretado para cargar la potencia y suéltalo para patear. Sin balón, hace una barrida: el rival cae y el balón queda para ti.</p><p><b><i class="dot" style="background:#389dff"></i> Celeste:</b> con balón, pasa. Sin balón, cambia al siguiente jugador.</p><p><b>Equipos:</b> 3 jugadores + arquero por lado. Los arqueros los controla la computadora y usan la camiseta y el short al revés. Si el balón sale por el fondo, saca el arquero.</p><p><b>Formaciones:</b> antes de cada partido eliges 1-2 (un defensa y dos delanteros), 2-1 (dos defensas y un delantero) o 1-1-1 (un defensa, un volante y un delantero). El rival usa una al azar.</p><p><b>Quitar el balón:</b> además de la barrida, si pasas por encima del balón que lleva un rival, te lo quedas y el rival cae al suelo un momento.</p><p><b>Penales:</b> al patear, toca ROJO cuando la mira esté donde quieras. Al atajar, elige Izq, Centro o Der.</p><p><b>Teclado:</b> flechas o WASD para moverte, Z rojo, X celeste.</p></div><button class="mb alt" id="mback2" data-i="left">Volver</button></div>
 </div>
 <div id="rot"><div class="ph"></div><b>Gira tu celular</b><span>Kl Soccer 2D se juega en horizontal</span></div>
 <script>
@@ -93,7 +95,9 @@ addEventListener('resize',resize);resize();
 const mk=(t,x,y,i,gk)=>({team:t,x,y,hx:x,hy:y,i,gk:!!gk,dir:t?Math.PI:0,fall:0,slide:0,sdir:0,cd:0,hit:false,sc:0,mv:false});
 const clamp=p=>{p.x=Math.max(10,Math.min(FW-10,p.x));p.y=Math.max(10,Math.min(FH-10,p.y))};
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
-function setup(){P=[];[[50,400,1],[330,400],[560,260],[560,540]].forEach(([x,y,g],i)=>{P.push(mk(0,x,y,i,g));P.push(mk(1,FW-x,FH-y,i+1,g))})}
+const FM={'1-2':[[330,400],[560,260],[560,540]],'2-1':[[330,260],[330,540],[600,400]],'1-1-1':[[300,400],[470,400],[640,400]]};
+let fm='1-2',fmR='1-2';
+function setup(){P=[];const A=[[50,400,1]].concat(FM[fm]),B=[[50,400,1]].concat(FM[fmR]);for(let k=0;k<4;k++){P.push(mk(0,A[k][0],A[k][1],k,A[k][2]));P.push(mk(1,FW-B[k][0],FH-B[k][1],k+1,B[k][2]))}}
 function kickoff(){for(const p of P){p.x=p.hx;p.y=p.hy;p.fall=p.slide=p.cd=0;p.dir=p.team?Math.PI:0}man=null;snap=true;Object.assign(ball,{x:750,y:400,vx:0,vy:0,o:null,free:.5,tg:null,tt:0})}
 function showOv(t,s,b,f){$('ov').style.display='flex';$('om').style.display=mode=='end'?'':'none';$('ot').textContent=t;$('os').textContent=s;$('ob').textContent=b;$('ob').onclick=f;ovFx(t)}
 function ovFx(t){
@@ -102,7 +106,7 @@ function ovFx(t){
  document.querySelectorAll('.cf').forEach(e=>e.remove());
  if(k=='win')for(let i=0;i<40;i++){const d=document.createElement('i');d.className='cf';d.style.cssText='left:'+Math.random()*100+'%;background:hsl('+Math.random()*360+',90%,60%);animation-delay:'+Math.random()*2+'s;animation-duration:'+(2+Math.random()*2)+'s';$('ov').appendChild(d)}}
 const hideOv=()=>$('ov').style.display='none';
-function restart(){score=[0,0];half=1;time=HALF;pen=null;setup();kickoff();mode='play';hideOv()}
+function restart(){score=[0,0];half=1;time=HALF;pen=null;fmR=Object.keys(FM)[Math.floor(Math.random()*3)];setup();kickoff();mode='play';hideOv()}
 $('ob').onclick=()=>{try{screen.orientation.lock('landscape').catch(()=>{})}catch(e){}restart()};
 function ctrlP(){
  if(ball.o&&ball.o.team==0&&!ball.o.gk){man=null;return ball.o}
@@ -124,14 +128,14 @@ function kick(p,pw=.46){
  ball.o=null;ball.free=.3;ball.tg=null;ball.vx=Math.cos(a)*(380+520*pw);ball.vy=Math.sin(a)*(380+520*pw);ball.x=p.x+Math.cos(a)*18;ball.y=p.y+Math.sin(a)*18}
 function pass(p,tq){
  let best=null,bs=-1e9;
- for(const q of P)if(q.team==p.team&&q!==p&&!q.fall){const a=Math.atan2(q.y-p.y,q.x-p.x),s=Math.cos(a-p.dir)*100-dist(p,q)*.05+(p.gk&&!q.gk?50:0);if(s>bs){bs=s;best=q}}
+ for(const q of P)if(q.team==p.team&&q!==p&&!q.gk&&!q.fall){const a=Math.atan2(q.y-p.y,q.x-p.x),s=Math.cos(a-p.dir)*100-dist(p,q)*.05+(p.gk&&!q.gk?50:0);if(s>bs){bs=s;best=q}}
  if(tq)best=tq;if(!best)return;
  const a=Math.atan2(best.y-p.y,best.x-p.x),sp=Math.min(520,190+dist(p,best)*1.3);
  ball.o=null;ball.free=.25;ball.vx=Math.cos(a)*sp;ball.vy=Math.sin(a)*sp;ball.x=p.x+Math.cos(a)*18;ball.y=p.y+Math.sin(a)*18;ball.tg=best;ball.tt=1.8}
 function slide(p,a){p.slide=.3;p.sdir=a;p.dir=a;p.cd=1.4;p.hit=false}
 function nearest(list,pt){let b=null,bd=1e9;for(const q of list)if(!q.fall){const d=dist(q,pt);if(d<bd){bd=d;b=q}}return b}
 function aiTarget(p){const d=p.team?-1:1;let b=null,bs=-1e9;for(const q of P)if(q.team==p.team&&q!==p&&!q.gk&&!q.fall){const f=d*(q.x-p.x);if(f>50){const s=f-Math.abs(q.y-p.y)*.25;if(s>bs){bs=s;b=q}}}return b}
-function passTgt(p){let b=null,bs=-1e9;for(const q of P)if(q.team==p.team&&q!==p&&!q.fall){const a=Math.atan2(q.y-p.y,q.x-p.x),s=Math.cos(a-p.dir)*100-dist(p,q)*.05+(p.gk&&!q.gk?50:0);if(s>bs){bs=s;b=q}}return b}
+function passTgt(p){let b=null,bs=-1e9;for(const q of P)if(q.team==p.team&&q!==p&&!q.gk&&!q.fall){const a=Math.atan2(q.y-p.y,q.x-p.x),s=Math.cos(a-p.dir)*100-dist(p,q)*.05+(p.gk&&!q.gk?50:0);if(s>bs){bs=s;b=q}}return b}
 function gkOut(p){
  let best=null,bs=-1e9;
  for(const q of P)if(q.team==p.team&&!q.gk&&!q.fall){const s=Math.abs(q.x-p.x)-Math.abs(q.y-p.y)*.3;if(s>bs){bs=s;best=q}}
@@ -171,7 +175,7 @@ function human(p,dt){
 function endHalf(){
  const s=score[0]+' - '+score[1];
  if(half==1){mode='half';showOv('Fin del primer tiempo','Marcador: '+s,'Segundo tiempo',()=>{half=2;time=HALF;kickoff();mode='play';hideOv()})}
- else if(score[0]!=score[1]){mode='end';showOv(score[0]>score[1]?'¡Ganaste!':'Perdiste','Final: '+s,'Jugar de nuevo',restart)}
+ else if(score[0]!=score[1]){mode='end';showOv(score[0]>score[1]?'¡Ganaste!':'Perdiste','Final: '+s,'Jugar de nuevo',again)}
  else{mode='end';showOv('Empate '+s,'¡Se define por penales!','Ir a penales',startPen)}}
 function backOut(t){const k=P.find(q=>q.team==t&&q.gk);if(!k)return;k.fall=0;k.slide=0;k.x=t?FW-40:40;k.y=400;k.dir=t?Math.PI:0;k.sc=0;ball.o=k;ball.tg=null;ball.vx=ball.vy=0}
 function goal(t){chg=null;banner=t;mode='goal';bt=1.8}
@@ -185,9 +189,9 @@ function update(dt){
  if(chg!==null){if(!ctrl||ball.o!==ctrl)chg=null;else chg=Math.min(1,chg+dt)}
  for(const p of P){
   p.cd-=dt;p.mv=false;
-  if(p.fall>0){p.fall-=dt;continue}
+  if(p.fall>0){p.fall=Math.max(0,p.fall-dt);continue}
   if(p.slide>0){
-   p.slide-=dt;p.x+=Math.cos(p.sdir)*270*dt;p.y+=Math.sin(p.sdir)*270*dt;clamp(p);
+   p.slide=Math.max(0,p.slide-dt);p.x+=Math.cos(p.sdir)*270*dt;p.y+=Math.sin(p.sdir)*270*dt;clamp(p);
    for(const q of P)if(q.team!=p.team&&!q.gk&&!q.fall&&dist(p,q)<32){q.fall=1.6;q.slide=0;p.hit=true;SFX.hit();if(ball.o===q){ball.o=p;p.sc=0}}
    if(p.slide<=0&&!p.hit)p.cd+=.6;
    continue}
@@ -220,7 +224,7 @@ function penUpdate(dt){
  if(pen.ph=='shot'){pen.anim+=dt;if(pen.anim>1.7){
   const a=pen.me.length,b=pen.op.length,sa=sum(pen.me),sb=sum(pen.op);let done;
   if(a>=5&&b>=5)done=a==b&&sa!=sb;else done=sa>sb+Math.max(0,5-b)||sb>sa+Math.max(0,5-a);
-  if(done){mode='end';showOv(sa>sb?'¡Ganaste en los penales!':'Perdiste en los penales','Penales: '+sa+' - '+sb,'Jugar de nuevo',restart)}
+  if(done){mode='end';showOv(sa>sb?'¡Ganaste en los penales!':'Perdiste en los penales','Penales: '+sa+' - '+sb,'Jugar de nuevo',again)}
   else{pen.turn=1-pen.turn;pen.ph='aim';pen.t=0}}}}
 const gkc=t=>({t:TC[t].p,p:TC[t].t});
 function drawPen(){
@@ -326,7 +330,7 @@ function showMenu(v){$('menu').style.display='flex';['m0','m1','m2'].forEach((id
 const om=document.createElement('button');om.id='om';$('ov').appendChild(om);
 om.onclick=()=>{hideOv();pen=null;mode='menu';ctrl=null;showMenu(0)};
 $('cfgbox').appendChild($('cfg'));
-$('mplay').onclick=()=>{showMenu(1);preview()};
+$('mplay').onclick=()=>{showMenu(1);preview();fmUI()};
 $('minfo').onclick=()=>showMenu(2);
 $('mback1').onclick=$('mback2').onclick=()=>showMenu(0);
 $('mgo').onclick=()=>{$('menu').style.display='none';try{screen.orientation.lock('landscape').catch(()=>{})}catch(e){}restart()};
@@ -367,6 +371,8 @@ const IC={
 function sb(el,k,l){const s=k+'|'+l;if(el.dataset.s===s)return;el.dataset.s=s;el.innerHTML=(IC[k]||'')+(l?'<b>'+l+'</b>':'')}
 document.querySelectorAll('[data-i]').forEach(e=>e.insertAdjacentHTML('afterbegin',IC[e.dataset.i]));
 om.innerHTML=IC.home+'Menú';
+function fmUI(){const b=$('fmbox');b.innerHTML='';for(const k in FM){const d=document.createElement('button');d.className='fo'+(k==fm?' on':'');let dots='<circle cx="5" cy="18" r="2.3" fill="#ffd91a"/>';for(const [x,y] of FM[k])dots+='<circle cx="'+(4+x/750*52)+'" cy="'+(3+y/800*30)+'" r="2.6" fill="#fff"/>';d.innerHTML='<svg viewBox="0 0 60 36"><rect x="1" y="1" width="58" height="34" rx="2" fill="#2e9d3f" stroke="#fff" stroke-width="1.2"/><path d="M30 1v34" stroke="#fff" stroke-width=".8"/>'+dots+'</svg><b>'+k+'</b>';d.onclick=()=>{fm=k;fmUI()};b.appendChild(d)}}
+function again(){hideOv();pen=null;mode='menu';ctrl=null;showMenu(1);preview();fmUI()}
 function snd(){$('psnd').innerHTML=(mute?IC.mute:IC.snd)+'Sonido: '+(mute?'desactivado':'activado')}snd();
 $('pz').onclick=()=>{if(mode=='play'||mode=='pen'){pm=mode;mode='pause';chg=null;joy.on=false;joy.x=joy.y=0;$('pa').style.display='flex';snd()}};
 $('pres').onclick=()=>{$('pa').style.display='none';mode=pm};
