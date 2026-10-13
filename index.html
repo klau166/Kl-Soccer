@@ -21,9 +21,9 @@ canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-ac
 #stick{position:fixed;left:calc(env(safe-area-inset-left,0px) + 24px);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.22);border:3px solid rgba(255,255,255,.55);touch-action:none}
 #knob{position:absolute;left:50%;top:50%;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.85);transform:translate(-50%,-50%);pointer-events:none}
 #pad{position:fixed;right:calc(env(safe-area-inset-right,0px) + 14px);bottom:calc(env(safe-area-inset-bottom,0px) + 12px);width:176px;height:176px}
-.b{position:absolute;width:80px;height:80px;border-radius:50%;border:0;font-weight:800;font-size:11px;line-height:1.15;white-space:pre-line;color:#fff;touch-action:none;box-shadow:0 4px 0 #0004}
-.b:active{transform:translateY(2px)}.b:disabled{opacity:.3}
-#br{background:#ee3333;top:0;right:0}#bb{background:#389dff;top:48px;left:0;color:#04223d}#by{background:#ffd91a;bottom:0;right:6px;color:#3a2c00}
+.b{position:absolute;width:80px;height:80px;border-radius:50%;border:0;font-weight:800;font-size:11px;line-height:1.15;white-space:pre-line;color:#fff;touch-action:none;box-shadow:0 3px 0 #0003;border:2px solid rgba(255,255,255,.75);text-shadow:0 1px 3px #000a}
+.b:active{transform:translateY(2px)}.b:disabled{opacity:.6}
+#br{background:rgba(238,51,51,.5);top:0;right:0}#bb{background:rgba(56,157,255,.5);top:48px;left:0}#by{background:rgba(255,217,26,.5);bottom:0;right:6px}
 #ov{position:fixed;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:rgba(0,0,0,.78);color:#fff;text-align:center;padding:10px}
 #ov h2{margin:0;font-size:24px}#ov p{margin:0;max-width:560px;font-size:13px}
 #cfg{display:flex;gap:14px;font-size:12px}#cfg label{display:flex;flex-direction:column;align-items:center;gap:3px}
@@ -34,7 +34,7 @@ canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-ac
 .mv{position:relative;display:none;flex-direction:column;align-items:center;gap:10px;text-align:center;max-height:100%;padding:8px}.mv.on{display:flex}
 .mv h1{margin:0;font-size:44px;letter-spacing:2px;text-shadow:0 4px 0 #0005}.mv h1 b{color:#ffd91a}.mv h2{margin:0;font-size:24px;text-shadow:0 2px 0 #0005}.sub{font-size:15px;opacity:.9;margin-top:-6px;margin-bottom:6px}
 .mb{width:260px;padding:14px;border:0;border-radius:14px;font-size:20px;font-weight:800;background:#ffd91a;color:#3a2c00;box-shadow:0 5px 0 #0004}.mb:active{transform:translateY(3px)}
-.mb.alt{background:rgba(255,255,255,.2);color:#fff;border:2px solid #fff8}
+.mb.alt{background:rgba(0,0,0,.5);color:#fff;border:2px solid #fff}
 .row{display:flex;gap:10px}.row .mb{width:auto;padding:12px 20px;font-size:17px}
 #info{text-align:left;font-size:13px;line-height:1.45;max-width:540px;max-height:58vh;overflow:auto;background:rgba(0,0,0,.35);padding:10px 14px;border-radius:12px}#info p{margin:0 0 7px}
 #om{padding:10px 24px;border:0;border-radius:10px;font-size:16px;font-weight:700;background:rgba(255,255,255,.2);color:#fff}
@@ -42,7 +42,7 @@ canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-ac
 #pv{position:static;width:200px;height:67px;background:rgba(0,0,0,.25);border-radius:10px}
 #rot{position:fixed;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#111;color:#fff;text-align:center;font-size:20px;font-weight:700}
 #rot span{font-size:70px}
-#snd{position:fixed;top:calc(env(safe-area-inset-top,0px) + 6px);right:calc(env(safe-area-inset-right,0px) + 10px);z-index:4;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.35);font-size:18px}
+#pz{position:fixed;top:calc(env(safe-area-inset-top,0px) + 6px);right:calc(env(safe-area-inset-right,0px) + 10px);z-index:4;width:44px;height:44px;border-radius:50%;border:2px solid #fff;background:rgba(20,60,25,.75);color:#fff;display:flex;align-items:center;justify-content:center;padding:0}#pz svg{width:22px;height:22px}
 #ov{overflow:hidden}#oe{font-size:64px;line-height:1;animation:pop 1s ease-in-out infinite alternate}
 @keyframes pop{from{transform:scale(1)}to{transform:scale(1.2) rotate(6deg)}}
 #ov.win{background:radial-gradient(circle,#1f8f36,#08350f)}#ov.lose{background:radial-gradient(circle,#8a2222,#2b0a0a)}#ov.draw{background:radial-gradient(circle,#44567e,#141a2b)}#ov.half{background:radial-gradient(circle,#3a3a3a,#111)}
@@ -52,28 +52,34 @@ canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-ac
 #rot{background:repeating-linear-gradient(90deg,#2e9d3f 0 90px,#35a948 90px 180px);gap:18px;text-shadow:0 2px 4px #0006}#rot b{font-size:28px}#rot span{font-size:15px;font-weight:500}
 .ph{width:56px;height:96px;border:6px solid #fff;border-radius:14px;position:relative;animation:rt 2.4s ease-in-out infinite}.ph::after{content:"";position:absolute;left:50%;bottom:7px;width:16px;height:4px;margin-left:-8px;background:#fff;border-radius:2px}
 @keyframes rt{0%,25%{transform:rotate(0)}65%,100%{transform:rotate(-90deg)}}
+.b{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0}.b svg{width:30px;height:30px}.b b{font-size:11px;font-weight:800}
+.mb svg{width:22px;height:22px;vertical-align:-4px;margin-right:8px}.mv h1 svg{width:40px;height:40px;margin-right:8px;vertical-align:-7px}#om svg{width:18px;height:18px;vertical-align:-3px;margin-right:6px}
+#oe svg{width:76px;height:76px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px}
+.pk{display:inline-block;width:11px;height:11px;border-radius:50%;margin:0 2px;border:2px solid #fff;vertical-align:-2px}.pk.g{background:#4caf50}.pk.r{background:#e53935}
+#pa{position:fixed;inset:0;z-index:7;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(0,0,0,.8);color:#fff}#pa h2{margin:0 0 4px;font-size:30px}
 </style></head><body>
 <canvas id="cv"></canvas>
 <div id="hud"><div id="sc"><span id="s0">0</span><i>:</i><span id="s1">0</span></div><div id="tm"></div></div>
 <div id="msg"></div>
-<button id="snd">🔊</button>
+<button id="pz" data-i="pause"></button>
 <div id="stick"><div id="knob"></div></div>
 <div id="pad"><div id="pw"><i id="pwf"></i></div><button class="b" id="br"></button><button class="b" id="bb"></button><button class="b" id="by"></button></div>
-<div id="ov"><div id="oe"></div><h2 id="ot">⚽ Kl Soccer 2D · 4 vs 4</h2>
+<div id="ov"><div id="oe"></div><h2 id="ot">Kl Soccer 2D</h2>
 <p id="os">Mueve a tu jugador con el joystick. ROJO: patea (con balón) o barrida (sin balón). CELESTE: pasa (con balón) o cambia de jugador (sin balón). AMARILLO: correr. Atacas hacia la derecha. 2 tiempos de 3 min; si hay empate, penales. El arquero rival (y el tuyo) los maneja la computadora y usa tus colores al revés.</p>
 <div id="cfg"><label>Mi camiseta<input type="color" id="k0" value="#2a6df4"></label><label>Mi short<input type="color" id="k1" value="#ffffff"></label>
 <label>Rival camiseta<input type="color" id="k2" value="#f2762e"></label><label>Rival short<input type="color" id="k3" value="#222222"></label></div>
 <button id="ob">Jugar</button></div>
+<div id="pa"><h2>Pausa</h2><button class="mb" id="pres" data-i="play">Volver al partido</button><button class="mb alt" id="pmenu" data-i="home">Volver al menú</button><button class="mb alt" id="psnd"></button></div>
 <div id="menu">
-<div class="mv" id="m0"><h1>⚽ KL SOCCER <b>2D</b></h1><div class="sub">Fútbol 4 vs 4</div><button class="mb" id="mplay">▶ JUGAR</button><button class="mb alt" id="minfo">ℹ INFORMACIÓN</button></div>
-<div class="mv" id="m1"><h2>Elige tu equipación</h2><canvas id="pv" width="240" height="80"></canvas><div id="cfgbox"></div><div class="row"><button class="mb alt" id="mback1">‹ Volver</button><button class="mb" id="mgo">¡A LA CANCHA!</button></div></div>
-<div class="mv" id="m2"><h2>Información</h2><div id="info"><p><b>Objetivo:</b> mete más goles que el rival. Hay 2 tiempos de 2 minutos; si queda empate se define por penales (5 tiros cada uno y luego muerte súbita).</p><p><b>Joystick (izquierda):</b> mueve a tu jugador. Atacas hacia la derecha.</p><p><b>🔴 Rojo:</b> con balón, mantenlo apretado para cargar la potencia y suéltalo para patear. Sin balón, hace una barrida: el rival cae y el balón queda para ti.</p><p><b>🔵 Celeste:</b> con balón, pasa. Sin balón, cambia al siguiente jugador.</p><p><b>Equipos:</b> 3 jugadores + arquero por lado. Los arqueros los controla la computadora y usan la camiseta y el short al revés. Si el balón sale por el fondo, saca el arquero.</p><p><b>Quitar el balón:</b> además de la barrida, si pasas por encima del balón que lleva un rival, te lo quedas y el rival cae al suelo un momento.</p><p><b>Penales:</b> al patear, toca ROJO cuando la mira esté donde quieras. Al atajar, elige Izq, Centro o Der.</p><p><b>Teclado:</b> flechas o WASD para moverte, Z rojo, X celeste.</p></div><button class="mb alt" id="mback2">‹ Volver</button></div>
+<div class="mv" id="m0"><h1>KL SOCCER</h1><div class="sub">Fútbol 4 vs 4</div><button class="mb" id="mplay" data-i="play">JUGAR</button><button class="mb alt" id="minfo" data-i="info">INFORMACIÓN</button></div>
+<div class="mv" id="m1"><h2>Elige tu equipación</h2><canvas id="pv" width="240" height="80"></canvas><div id="cfgbox"></div><div class="row"><button class="mb alt" id="mback1" data-i="left">Volver</button><button class="mb" id="mgo">¡A LA CANCHA!</button></div></div>
+<div class="mv" id="m2"><h2>Información</h2><div id="info"><p><b>Objetivo:</b> mete más goles que el rival. Hay 2 tiempos de 2 minutos; si queda empate se define por penales (5 tiros cada uno y luego muerte súbita).</p><p><b>Joystick (izquierda):</b> mueve a tu jugador. Atacas hacia la derecha.</p><p><b><i class="dot" style="background:#ee3333"></i> Rojo:</b> con balón, mantenlo apretado para cargar la potencia y suéltalo para patear. Sin balón, hace una barrida: el rival cae y el balón queda para ti.</p><p><b><i class="dot" style="background:#389dff"></i> Celeste:</b> con balón, pasa. Sin balón, cambia al siguiente jugador.</p><p><b>Equipos:</b> 3 jugadores + arquero por lado. Los arqueros los controla la computadora y usan la camiseta y el short al revés. Si el balón sale por el fondo, saca el arquero.</p><p><b>Quitar el balón:</b> además de la barrida, si pasas por encima del balón que lleva un rival, te lo quedas y el rival cae al suelo un momento.</p><p><b>Penales:</b> al patear, toca ROJO cuando la mira esté donde quieras. Al atajar, elige Izq, Centro o Der.</p><p><b>Teclado:</b> flechas o WASD para moverte, Z rojo, X celeste.</p></div><button class="mb alt" id="mback2" data-i="left">Volver</button></div>
 </div>
 <div id="rot"><div class="ph"></div><b>Gira tu celular</b><span>Kl Soccer 2D se juega en horizontal</span></div>
 <script>
 const cv=document.getElementById('cv'),$=id=>document.getElementById(id);let cx=cv.getContext('2d');
 const FW=1500,FH=800,GY0=310,GY1=490,HALF=120,VH=450;
-let mode='menu',half=1,time=HALF,score=[0,0],bt=0,P=[],ctrl=null,man=null,pen=null,run=false,last=0,banner='',K=1,VW=800,T=0,snap=true,FK=1,FOX=0,FOY=0,chg=null;
+let mode='menu',half=1,time=HALF,score=[0,0],bt=0,P=[],ctrl=null,man=null,pen=null,run=false,last=0,banner='',K=1,VW=800,T=0,snap=true,FK=1,FOX=0,FOY=0,chg=null,pm='play';
 const cam={x:0,y:0},ball={x:750,y:400,vx:0,vy:0,o:null,free:0,tg:null,tt:0},keys={},joy={on:false,x:0,y:0};
 const SKIN=['#f1c27d','#c68642','#8d5524','#e0ac69'],HAIR=['#2b1b0e','#6b3f1a','#d9b44a','#111'];
 let TC=[{t:'#2a6df4',p:'#ffffff'},{t:'#f2762e',p:'#222222'}];
@@ -92,7 +98,7 @@ function kickoff(){for(const p of P){p.x=p.hx;p.y=p.hy;p.fall=p.slide=p.cd=0;p.d
 function showOv(t,s,b,f){$('ov').style.display='flex';$('om').style.display=mode=='end'?'':'none';$('ot').textContent=t;$('os').textContent=s;$('ob').textContent=b;$('ob').onclick=f;ovFx(t)}
 function ovFx(t){
  const k=/Ganaste/.test(t)?'win':/Perdiste/.test(t)?'lose':/Empate/.test(t)?'draw':/primer/.test(t)?'half':'';
- $('ov').className=k;$('oe').textContent={win:'🏆',lose:'😞',draw:'🤝',half:'⏱️'}[k]||'';
+ $('ov').className=k;$('oe').innerHTML=IC[{win:'trophy',lose:'sad',draw:'draw',half:'clock'}[k]]||'';
  document.querySelectorAll('.cf').forEach(e=>e.remove());
  if(k=='win')for(let i=0;i<40;i++){const d=document.createElement('i');d.className='cf';d.style.cssText='left:'+Math.random()*100+'%;background:hsl('+Math.random()*360+',90%,60%);animation-delay:'+Math.random()*2+'s;animation-duration:'+(2+Math.random()*2)+'s';$('ov').appendChild(d)}}
 const hideOv=()=>$('ov').style.display='none';
@@ -146,9 +152,9 @@ function ai(p,dt){
   return}
  const hx=Math.max(60,Math.min(FW-60,p.hx+(ball.x-750)*.45)),hy=Math.max(40,Math.min(FH-40,p.hy+(ball.y-400)*.35)),S=130;
  if(ball.o&&ball.o.team!=t){
-  if(nearest(mates,ball.o)===p){
-   mvTo(p,ball.o.x,ball.o.y,S,dt);
-   if(dist(p,ball.o)<50&&p.cd<=0&&Math.random()<dt*1.8)slide(p,Math.atan2(ball.o.y-p.y,ball.o.x-p.x))
+  if(nearest(mates,ball.o)===p||(!ball.o.mv&&mates.filter(q=>!q.fall).sort((a,b)=>dist(a,ball.o)-dist(b,ball.o)).indexOf(p)==1)){
+   mvTo(p,ball.o.x,ball.o.y,ball.o.mv?S:165,dt);
+   if(dist(p,ball.o)<50&&p.cd<=0&&Math.random()<dt*(ball.o.mv?1.8:3.5))slide(p,Math.atan2(ball.o.y-p.y,ball.o.x-p.x))
   }else mvTo(p,hx,hy,S,dt)
  }else if(ball.o){const c=ball.o,d=t?-1:1,oth=mates.filter(q=>q!==c).sort((a,b)=>a.i-b.i),k=Math.max(0,oth.indexOf(p));mvTo(p,Math.max(150,Math.min(FW-150,c.x+d*(170+k*70))),Math.max(70,Math.min(FH-70,c.y+(k==0?-180:k==1?180:0))),S,dt)}
  else if(nearest(mates,ball)===p)mvTo(p,ball.x+ball.vx*.2,ball.y+ball.vy*.2,S,dt);
@@ -183,7 +189,7 @@ function update(dt){
    continue}
   p===ctrl?human(p,dt):ai(p,dt)}
  if(!ball.o&&ball.free<=0)for(const p of P)if(!p.fall&&dist(p,ball)<(p.gk?30:26)){ball.o=p;p.sc=0;ball.tg=null;if(p.gk)SFX.save();break}
- ball.stl=(ball.stl||0)-dt;if(ball.o&&ball.stl<=0&&!ball.o.gk)for(const p of P)if(p.team!=ball.o.team&&!p.fall&&(dist(p,ball)<22||dist(p,ball.o)<24)&&(p.team==0||Math.random()<dt*6)){if(p.team==0){ball.o.fall=1.3;ball.o.slide=0}SFX.steal();ball.o=p;p.sc=0;ball.stl=.6;ball.tg=null;break}
+ ball.stl=(ball.stl||0)-dt;if(ball.o&&ball.stl<=0&&!ball.o.gk)for(const p of P)if(p.team!=ball.o.team&&!p.fall&&(dist(p,ball)<22||dist(p,ball.o)<24)&&(p.team==0||Math.random()<dt*(ball.o.mv?6:12))){if(p.team==0){ball.o.fall=1.3;ball.o.slide=0}SFX.steal();ball.o=p;p.sc=0;ball.stl=.6;ball.tg=null;break}
  if(ball.o){const o=ball.o;ball.x=o.x+Math.cos(o.dir)*20;ball.y=o.y+Math.sin(o.dir)*20;ball.vx=ball.vy=0}
  else{
   ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;const f=Math.exp(-.9*dt);ball.vx*=f;ball.vy*=f;
@@ -255,7 +261,7 @@ function drawField(){
  cx.fillStyle='#fff';cx.fillRect(0,GY0,8,GY1-GY0);cx.fillRect(FW-8,GY0,8,GY1-GY0)}
 function draw(){
  if(portrait())return;
- if(pen&&(mode=='pen'||mode=='end'))return drawPen();
+ if(pen&&(mode=='pen'||mode=='end'||(mode=='pause'&&pm=='pen')))return drawPen();
  cx.setTransform(1,0,0,1,0,0);cx.fillStyle='#2e9d3f';cx.fillRect(0,0,cv.width,cv.height);
  cx.setTransform(FK,0,0,FK,FOX,FOY);
  drawField();
@@ -272,20 +278,20 @@ function draw(){
  cx.fillStyle='#fff';cx.strokeStyle='#111';cx.lineWidth=2;cx.beginPath();cx.arc(ball.x,ball.y,9,0,7);cx.fill();cx.stroke();
  if(mode=='goal'){cx.setTransform(K,0,0,K,0,0);cx.fillStyle='rgba(0,0,0,.45)';cx.fillRect(0,160,VW,110);cx.fillStyle='#fff';cx.font='bold 60px system-ui';cx.textAlign='center';cx.fillText(banner,VW/2,238)}}
 function ui(){
- const R=$('br'),C=$('bb'),Y=$('by');
+ const R=$('br'),C=$('bb'),Y=$('by');$('pz').style.display=(mode=='play'||mode=='pen'||mode=='goal')?'flex':'none';
  if(pen){
-  const m=a=>a.map(x=>x?'●':'✕').join(' ');
-  $('s0').textContent=sum(pen.me);$('s1').textContent=sum(pen.op);$('tm').textContent='Penales · '+m(pen.me)+' | '+m(pen.op);
+  const m=a=>a.map(x=>'<i class="pk '+(x?'g':'r')+'"></i>').join('');
+  $('s0').textContent=sum(pen.me);$('s1').textContent=sum(pen.op);$('tm').innerHTML='Penales · '+m(pen.me)+' | '+m(pen.op);
   const aim=pen.ph=='aim'&&mode=='pen';Y.style.display='';
-  if(pen.turn==0){R.textContent='⚽\nPATEAR';C.textContent='—';Y.textContent='—';R.disabled=!aim;C.disabled=Y.disabled=true}
-  else{R.textContent='◀\nIZQ';C.textContent='●\nCENTRO';Y.textContent='▶\nDER';R.disabled=C.disabled=Y.disabled=!aim}
+  if(pen.turn==0){sb(R,'kick','PATEAR');sb(C,'','');sb(Y,'','');R.disabled=!aim;C.disabled=Y.disabled=true}
+  else{sb(R,'left','IZQ');sb(C,'mid','CENTRO');sb(Y,'right','DER');R.disabled=C.disabled=Y.disabled=!aim}
   $('msg').textContent=mode!='pen'?'':aim?(pen.turn==0?'Toca PATEAR cuando la mira esté donde quieras':'Tiro rival: ¿hacia dónde te lanzas?'):'';
   return}
  
  $('s0').textContent=score[0];$('s1').textContent=score[1];
  $('tm').textContent=(half==1?'1T ':'2T ')+Math.floor(time/60)+':'+String(Math.ceil(time%60)%60).padStart(2,'0');
  const c=ctrl,hb=c&&ball.o===c,pl=mode=='play';
- R.textContent=hb?'⚽\nPATEAR':'🦶\nBARRIDA';C.textContent=hb?'➡️\nPASAR':'🔄\nCAMBIAR';Y.textContent='💨\nCORRER';
+ hb?sb(R,'kick','PATEAR'):sb(R,'slide','BARRIDA');hb?sb(C,'pass','PASAR'):sb(C,'swap','CAMBIAR');
  R.disabled=!pl||!c||(!hb&&(c.cd>0||c.fall>0||c.slide>0));C.disabled=!pl;Y.disabled=!pl;Y.style.display='none';$('msg').textContent=''}
 function act(i){
  if(mode=='pen')return penAct(i);
@@ -313,7 +319,7 @@ function preview(){
  [[TC[0],'Tú',0],[gkc(0),'Arquero',1],[TC[1],'Rival',2],[gkc(1),'Arquero',3]].forEach(([c,n,i],k)=>{sprite(30+k*60,34,3.6,Math.PI/2,c,false,0,0,i);c2.fillStyle='#fff';c2.font='11px system-ui';c2.textAlign='center';c2.fillText(n,30+k*60,74)});
  cx=old}
 function showMenu(v){$('menu').style.display='flex';['m0','m1','m2'].forEach((id,i)=>$(id).classList.toggle('on',i==v))}
-const om=document.createElement('button');om.id='om';om.textContent='☰ Menú';$('ov').appendChild(om);
+const om=document.createElement('button');om.id='om';$('ov').appendChild(om);
 om.onclick=()=>{hideOv();pen=null;mode='menu';ctrl=null;showMenu(0)};
 $('cfgbox').appendChild($('cfg'));
 $('mplay').onclick=()=>{showMenu(1);preview()};
@@ -334,6 +340,32 @@ const SFX={kick(){tone(170,.12,'square',.18,60);noise(.08,.25,500)},pass(){tone(
 {const o=kickoff;kickoff=()=>{o();SFX.whistle()}}
 {const o=endHalf;endHalf=()=>{o();SFX.whistle()}}
 {const o=penAct;penAct=i=>{const n=pen&&pen.ph=='aim'&&mode=='pen';o(i);if(n&&pen.ph=='shot'){SFX.kick();const g=pen.goal;setTimeout(()=>g?SFX.goal():SFX.save(),450)}}}
-$('snd').onclick=()=>{mute=!mute;$('snd').textContent=mute?'🔇':'🔊'};
 addEventListener('pointerdown',au);
+const S=(p)=>'<svg viewBox="0 0 24 24" fill="currentColor">'+p+'</svg>',ST='fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"';
+const SPK='<path d="M3 9h4l5-4.5v15L7 15H3z"/>';
+const IC={
+ ball:S('<circle cx="12" cy="12" r="10" fill="#fff" stroke="#111" stroke-width="2"/><path d="M12 6.5l4.3 3.1-1.6 5.1H9.3L7.7 9.6z" fill="#111"/><path d="M12 6.5V2M16.3 9.6l4-1.3M14.7 14.7l2.5 3.5M9.3 14.7l-2.5 3.5M7.7 9.6l-4-1.3" stroke="#111" stroke-width="1.6"/>'),
+ kick:S('<path d="M2 21v-7l5-1.5 3 3h4.5l2 2.5v3z"/><circle cx="19" cy="8" r="3"/><path d="M14 4l1.8 2M20.5 2.5v2.4M13.5 9l2.2.4" '+ST+' stroke-width="2"/>'),
+ slide:S('<path d="M2 17h13l5-5 2 1.5V19H2z"/><path d="M3 9h7M5 5h7" '+ST+' stroke-width="2.4"/>'),
+ pass:S('<path d="M3 12h14M11 5l8 7-8 7" '+ST+' stroke-width="3"/>'),
+ swap:S('<path d="M4 8h14M14 4l4 4-4 4M20 16H6M10 12l-4 4 4 4" '+ST+' stroke-width="2.6"/>'),
+ left:S('<path d="M15 4l-8 8 8 8" '+ST+' stroke-width="3.5"/>'),right:S('<path d="M9 4l8 8-8 8" '+ST+' stroke-width="3.5"/>'),mid:S('<circle cx="12" cy="12" r="6.5"/>'),
+ play:S('<path d="M7 3.5l13 8.5-13 8.5z"/>'),
+ info:S('<circle cx="12" cy="12" r="9.5" '+ST+' stroke-width="2.4"/><rect x="10.8" y="10.5" width="2.4" height="7"/><circle cx="12" cy="7" r="1.5"/>'),
+ home:S('<path d="M3 12l9-8 9 8h-3v8h-4.5v-5h-3v5H6v-8z"/>'),
+ pause:S('<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>'),
+ snd:S(SPK+'<path d="M15.5 8.5c2 2 2 5 0 7M18.5 5.5c4 3.5 4 9.5 0 13" '+ST+' stroke-width="2.2"/>'),
+ mute:S(SPK+'<path d="M15 9l6 6M21 9l-6 6" '+ST+' stroke-width="2.4"/>'),
+ trophy:S('<path d="M7 3h10v6a5 5 0 0 1-10 0z" fill="#ffd91a" stroke="#8a6d00" stroke-width="1.5"/><path d="M7 5H3c0 4 2 6 4.5 6M17 5h4c0 4-2 6-4.5 6" fill="none" stroke="#ffd91a" stroke-width="2"/><rect x="10.5" y="14" width="3" height="4" fill="#ffd91a"/><rect x="7" y="18" width="10" height="3" rx="1" fill="#ffd91a" stroke="#8a6d00" stroke-width="1.2"/>'),
+ sad:S('<circle cx="12" cy="12" r="10" fill="#ffd91a" stroke="#6b5500" stroke-width="1.5"/><circle cx="8.5" cy="10" r="1.5" fill="#222"/><circle cx="15.5" cy="10" r="1.5" fill="#222"/><path d="M7.5 17c1.5-3 7.5-3 9 0" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/>'),
+ draw:S('<circle cx="9" cy="12" r="6.5" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="15" cy="12" r="6.5" fill="none" stroke="#fff" stroke-width="2.4"/>'),
+ clock:S('<circle cx="12" cy="12" r="10" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M12 6v6l4 3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>')};
+function sb(el,k,l){const s=k+'|'+l;if(el.dataset.s===s)return;el.dataset.s=s;el.innerHTML=(IC[k]||'')+(l?'<b>'+l+'</b>':'')}
+document.querySelectorAll('[data-i]').forEach(e=>e.insertAdjacentHTML('afterbegin',IC[e.dataset.i]));
+om.innerHTML=IC.home+'Menú';
+function snd(){$('psnd').innerHTML=(mute?IC.mute:IC.snd)+'Sonido: '+(mute?'desactivado':'activado')}snd();
+$('pz').onclick=()=>{if(mode=='play'||mode=='pen'){pm=mode;mode='pause';chg=null;joy.on=false;joy.x=joy.y=0;$('pa').style.display='flex';snd()}};
+$('pres').onclick=()=>{$('pa').style.display='none';mode=pm};
+$('pmenu').onclick=()=>{$('pa').style.display='none';pen=null;mode='menu';ctrl=null;hideOv();showMenu(0)};
+$('psnd').onclick=()=>{mute=!mute;snd()};
 </script></body></html>
